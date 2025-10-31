@@ -2,30 +2,27 @@
 
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { motion, useAnimation } from "framer-motion";
+import { motion } from "framer-motion";
 
 import Header from "@/components/ui/Header/HomePageHeader";
 import Footer from "@/components/ui/Footer";
 import DesktopSlider from "@/components/ui/DesktopSlider";
 import MobileSlider from "@/components/ui/MobileSlider";
-import adminAboutUs from "@/components/ui/adminAboutUs";
 import AboutUsSection from "@/components/ui/adminAboutUs";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-
-
 
 const sentence = "Your journey to better healthcare starts now.";
 
 const container = {
   hidden: { opacity: 1 },
-  visible: (i = 1) => ({
+  visible: {
     opacity: 1,
     transition: {
       staggerChildren: 0.05,
       delayChildren: 0.3,
     },
-  }),
+  },
 };
 
 const child = {
@@ -41,23 +38,20 @@ const child = {
 };
 
 export default function Home() {
-  const { data: session, status } = useSession();
-  const controls = useAnimation();
+  const { data: session } = useSession();
+  const [showSentence, setShowSentence] = useState(true);
 
+  // Optional: Loop the sentence fade in/out
   useEffect(() => {
-    const loopAnimation = async () => {
-      while (true) {
-        await controls.start("hidden");
-        await controls.start("visible");
-        await new Promise((res) => setTimeout(res, 2000)); // wait before restarting
-      }
-    };
-
-    loopAnimation();
-  }, [controls]);
+    const interval = setInterval(() => {
+      setShowSentence(false);
+      setTimeout(() => setShowSentence(true), 500); // fade out then in
+    }, 5000); // every 5 seconds
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-       <div className="w-full min-h-screen flex flex-col bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
+    <div className="w-full min-h-screen flex flex-col bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
       <Header />
 
       {/* Hero Section */}
@@ -93,8 +87,7 @@ export default function Home() {
             transition={{ delay: 0.6, duration: 1 }}
             className="text-base sm:text-lg text-gray-700 dark:text-gray-300 font-medium"
           >
-            A modern platform where certified doctors meet patients in need —
-            fast, secure, and human-centered care starts here.
+            A modern platform where certified doctors meet patients in need — fast, secure, and human-centered care starts here.
           </motion.p>
 
           {!session?.user && (
@@ -152,11 +145,9 @@ export default function Home() {
           transition={{ delay: 0.4, duration: 1 }}
           className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto"
         >
-          Whether you're a doctor seeking visibility or a patient seeking care,
-          DR Port connects you to what matters —{" "}
+          Whether you're a doctor seeking visibility or a patient seeking care, DR Port connects you to what matters —{" "}
           <span className="font-semibold">
-            real-time interaction, verified professionals, and accessible
-            medical support
+            real-time interaction, verified professionals, and accessible medical support
           </span>{" "}
           — anytime, anywhere.
         </motion.p>
@@ -184,10 +175,10 @@ export default function Home() {
       {/* CTA Section */}
       <section className="mt-16 px-6 sm:px-16 py-16 bg-gradient-to-br from-blue-100 to-blue-200 dark:from-gray-800 dark:to-gray-900 text-center rounded-t-3xl">
         <motion.h3
-          className="text-3xl font-bold mb-4"
+          className="text-3xl font-bold mb-4 flex justify-center"
           variants={container}
           initial="hidden"
-          animate="visible"
+          animate={showSentence ? "visible" : "hidden"}
         >
           {sentence.split("").map((char, index) => (
             <motion.span key={index} variants={child}>
@@ -217,6 +208,8 @@ export default function Home() {
           </Link>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }

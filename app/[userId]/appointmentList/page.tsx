@@ -9,8 +9,8 @@ import { authOptions } from "@/lib/authOptions";
 import AppointmentList from "./AppointmentList";
 // Ensure correct path
 
-export default async function page({ params }: { params: { userId: string } }) {
-  const { userId } = params;
+export default async function page({ params }: { params: Promise<{ userId: string }> }) {
+  const { userId } = await params;
 
   // Ensure MongoDB connection is established
   await dbConnect();
