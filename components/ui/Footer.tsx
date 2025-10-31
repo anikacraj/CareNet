@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Logo & Description */}
         <div>
-          <h2 className="text-2xl font-bold text-blue-600 dark:text-blue-400">DR PORT.</h2>
+          <h2 className="text-2xl font-bold text-blue-600 dark:text-blue-400">Care Connect</h2>
           <p className="mt-2 text-sm">Empowering doctors with personalized digital profiles. Built for trust & professionalism.</p>
         </div>
 

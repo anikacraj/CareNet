@@ -18,7 +18,7 @@ export default function UserPageHeader() {
       <div className='container mx-auto flex justify-between items-center'>
         <Link href='/'>
           <h1 className='text-4xl font-bold text-blue-500 dark:text-white'>
-            🩺DR <span className='text-accent text-blue-700 dark:text-blue-400'>Port.</span>
+           🩺Care Connect
           </h1>
         </Link>
 

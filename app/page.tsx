@@ -52,82 +52,71 @@ export default function Home() {
 
   return (
     <div className="w-full min-h-screen flex flex-col bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
-      <Header />
+<Header />
 
-      {/* Hero Section */}
-      <section className="flex flex-col sm:flex-row items-center justify-between px-6 sm:px-16 py-20 gap-12">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="text-center sm:text-left max-w-xl space-y-6"
+{/* Hero Section */}
+<section
+  className="relative flex flex-col top-16 mb-30 items-center justify-center px-6 sm:px-16 py-42  bg-cover bg-center"
+  style={{ backgroundImage: "url('/coverImage2.jpg')" }}
+>
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-black/40"></div>
+
+  {/* Content */}
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1 }}
+    className="relative text-center max-w-4xl space-y-6 z-10"
+  >
+    <h1 className="text-4xl sm:text-6xl font-extrabold leading-tight text-white">
+      {session?.user ? (
+        <>
+          Welcome back,{" "}
+          <span className="text-blue-400">{session.user.name}</span>
+        </>
+      ) : (
+        <>
+          Bridging Care & <br className="sm:hidden" />
+          Connection at{" "}
+          <span className="text-blue-400">🩺Care Connect</span>
+        </>
+      )}
+    </h1>
+
+    <motion.p
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.6, duration: 1 }}
+      className="text-base sm:text-lg text-gray-200 font-medium"
+    >
+      A modern platform where certified doctors meet patients in need — fast, secure, and human-centered care starts here.
+    </motion.p>
+
+    {!session?.user && (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 1 }}
+        className="flex justify-center gap-4"
+      >
+        <Link
+          href="/register"
+          className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition"
         >
-          <h1 className="text-4xl sm:text-6xl font-extrabold leading-tight">
-            {session?.user ? (
-              <>
-                Welcome back,{" "}
-                <span className="text-blue-600 dark:text-blue-400">
-                  {session.user.name}
-                </span>
-              </>
-            ) : (
-              <>
-                Bridging Care & <br className="sm:hidden" />
-                Connection at{" "}
-                <span className="text-blue-600">
-                  <span className="dark:text-white text-black">🩺DR</span> Port.
-                </span>
-              </>
-            )}
-          </h1>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 1 }}
-            className="text-base sm:text-lg text-gray-700 dark:text-gray-300 font-medium"
-          >
-            A modern platform where certified doctors meet patients in need — fast, secure, and human-centered care starts here.
-          </motion.p>
-
-          {!session?.user && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.2, duration: 1 }}
-              className="flex justify-center sm:justify-start gap-4"
-            >
-              <Link
-                href="/register"
-                className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition"
-              >
-                Join as Doctor
-              </Link>
-              <Link
-                href="/patientHome"
-                className="px-6 py-3 border border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg font-semibold hover:bg-blue-50 dark:hover:bg-gray-800 transition"
-              >
-                Go Patient Page
-              </Link>
-            </motion.div>
-          )}
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2 }}
-          className="relative w-[280px] h-[280px] sm:w-[450px] sm:h-[380px] shadow-2xl rounded-xl"
+          Join as Doctor
+        </Link>
+        <Link
+          href="/patientHome"
+          className="px-6 py-3 border border-blue-600 text-blue-200 rounded-lg font-semibold hover:bg-blue-50 transition"
         >
-          <Image
-            src="/contactDr.png"
-            alt="Doctor Illustration"
-            fill
-            priority
-            className="object-cover rounded-xl"
-          />
-        </motion.div>
-      </section>
+          Go Patient Page
+        </Link>
+      </motion.div>
+    )}
+  </motion.div>
+</section>
+
 
       {/* Why DR Port Section */}
       <section className="py-16 px-6 sm:px-16 bg-blue-50 dark:bg-gray-900 text-center">
@@ -137,7 +126,7 @@ export default function Home() {
           transition={{ duration: 0.8 }}
           className="text-3xl sm:text-4xl font-bold text-blue-700 dark:text-blue-400 mb-6"
         >
-          Why DR Port?
+          Why  Care Connect?
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
@@ -145,7 +134,7 @@ export default function Home() {
           transition={{ delay: 0.4, duration: 1 }}
           className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto"
         >
-          Whether you're a doctor seeking visibility or a patient seeking care, DR Port connects you to what matters —{" "}
+          Whether you're a doctor seeking visibility or a patient seeking care,  Care Connect connects you to what matters —{" "}
           <span className="font-semibold">
             real-time interaction, verified professionals, and accessible medical support
           </span>{" "}
@@ -209,7 +198,7 @@ export default function Home() {
         </div>
       </section>
 
-      <Footer />
+  
     </div>
   );
 }
